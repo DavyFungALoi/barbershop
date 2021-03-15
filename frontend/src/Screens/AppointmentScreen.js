@@ -1,7 +1,8 @@
 import React from "react";
+import { useState, useEffect } from "react";
 
 const AppointmentScreen = () => {
-  var slotConfig = {
+  const slotConfig = {
     configSlotMinutes: "30",
     timeArr: [{ startTime: "09:00", endTime: "17:00" }],
   };
@@ -67,22 +68,49 @@ const AppointmentScreen = () => {
       }
     }
 
-    console.log(slotsArray);
+    setSlotsArray(slotsArray);
     return slotsArray;
   }
 
+  useEffect(() => {
+    createSlots(slotConfig);
+  }, []);
+
+  const [slotsArray, setSlotsArray] = useState([]);
+
   const SubmitHandler = () => {
     console.log("hello");
-    createSlots(slotConfig);
+    console.log(slotsArray);
   };
 
   return (
-    <div>
-      AppointmentScreen
+    <>
+      Make An Appointment
       <button onClick={SubmitHandler}>Generate Time Slots</button>
-      git test
-    </div>
+      {slotsArray.map((timeslot) => (
+        <>
+          <button>
+            {timeslot.timeSlotStart} - {timeslot.timeSlotEnd}
+          </button>
+        </>
+      ))}
+    </>
   );
 };
 
 export default AppointmentScreen;
+
+/*
+ {slotsArray.map((timeslot) => {
+        <button>{timeslot.timeArr}</button>
+      })}
+      `string text ${expression} string text`
+
+
+      {products.map((product) => (
+              <tr key={product._id}>
+                
+              </tr>
+            ))}
+
+*/
