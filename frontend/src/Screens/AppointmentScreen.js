@@ -107,18 +107,3 @@ const AppointmentScreen = () => {
 };
 
 export default AppointmentScreen;
-
-/*
- {slotsArray.map((timeslot) => {
-        <button>{timeslot.timeArr}</button>
-      })}
-      `string text ${expression} string text`
-
-
-      {products.map((product) => (
-              <tr key={product._id}>
-                
-              </tr>
-            ))}
-
-*/
