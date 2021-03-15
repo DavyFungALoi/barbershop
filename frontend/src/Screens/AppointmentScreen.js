@@ -2,12 +2,12 @@ import React from "react";
 import { useState, useEffect } from "react";
 
 const AppointmentScreen = () => {
-  const slotConfig = {
-    configSlotMinutes: "30",
-    timeArr: [{ startTime: "09:00", endTime: "17:00" }],
-  };
+  function createSlots() {
+    const slotConfig = {
+      configSlotMinutes: "30",
+      timeArr: [{ startTime: "09:00", endTime: "17:00" }],
+    };
 
-  function createSlots(slotConfig) {
     // Getting values from slotConfig using destructuring
     const { configSlotMinutes, timeArr } = slotConfig;
 
@@ -63,6 +63,7 @@ const AppointmentScreen = () => {
               minute: "numeric",
               hour12: false,
             }),
+            timeSlotId: i++,
           });
         }
       }
@@ -73,27 +74,34 @@ const AppointmentScreen = () => {
   }
 
   useEffect(() => {
-    createSlots(slotConfig);
+    createSlots();
   }, []);
 
   const [slotsArray, setSlotsArray] = useState([]);
 
-  const SubmitHandler = () => {
-    console.log("hello");
-    console.log(slotsArray);
+  const [currentTimeSlot, setCurrentTimeSlot] = useState("Please Select a Timeslot");
+
+  const TimeSlotHandler = (timeslotStart, timeSlotEnd) => {
+    setCurrentTimeSlot(`${timeslotStart} - ${timeSlotEnd}`);
+  
   };
 
   return (
     <>
-      Make An Appointment
-      <button onClick={SubmitHandler}>Generate Time Slots</button>
-      {slotsArray.map((timeslot) => (
-        <>
-          <button>
-            {timeslot.timeSlotStart} - {timeslot.timeSlotEnd}
+      <div>Make An Appointment</div>
+
+      {slotsArray.map((timeSlot) => (
+        <div key={timeSlot.timeSlotId}>
+          <button
+            onClick={() =>
+              TimeSlotHandler(timeSlot.timeSlotStart, timeSlot.timeSlotEnd)
+            }
+          >
+            {timeSlot.timeSlotStart} - {timeSlot.timeSlotEnd}
           </button>
-        </>
+        </div>
       ))}
+      <div>Selected timeslot is {currentTimeSlot}</div>
     </>
   );
 };
