@@ -80,7 +80,7 @@ const AppointmentScreen = () => {
     <div>
       AppointmentScreen
       <button onClick={SubmitHandler}>Generate Time Slots</button>
-      Done
+      git test
     </div>
   );
 };
