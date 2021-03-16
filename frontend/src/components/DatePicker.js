@@ -3,7 +3,19 @@ import { useEffect, useState } from "react";
 import { map } from "../sampleAppointment";
 
 const DatePicker = () => {
-  ///Get the current Day
+  ///Get the current Day/
+  /*
+  const now = new Date();
+  const currentDaysInMonth = new Date(
+    now.getFullYear(),
+    now.getMonth() + 1,
+    0
+  ).getDate();
+  */
+  
+
+  
+
   const now = new Date();
   const currentDaysInMonth = new Date(
     now.getFullYear(),
@@ -24,14 +36,20 @@ const DatePicker = () => {
     { Month: "November", days: 30 },
     { Month: "December", days: 31 },
   ];
-  const [currentMonth, setCurrentMonth] = useState([]);
+  /// const [currentMonth, setCurrentMonth] = useState([]);
   const [selectedDate, setSelectedDate] = useState("No Date");
   const [dayArraySize, setdayArraySize] = useState([]);
   const [daysInMonth, setDaysInMonth] = useState(currentDaysInMonth);
 
+  const [fillCalendar, setFillCalendar] = useState({
+    daysInMonth2: currentDaysInMonth,
+    currentMonth: [],
+  });
+
   const checkCurrentMonth = () => {
     const d = new Date();
-    setCurrentMonth(months[d.getMonth()].Month);
+    /// setCurrentMonth(months[d.getMonth()].Month);
+    setFillCalendar({ currentMonth: months[d.getMonth()].Month });
   };
   const createDays = (daysInMonth) => {
     let newdayArraySize = [];
@@ -42,7 +60,19 @@ const DatePicker = () => {
     setdayArraySize(newdayArraySize);
   };
 
+  const createTest = (daysInMonth) => {
+    let newdayArraySizeTest = [];
+    for (let i = 0; i < daysInMonth; i++) {
+      newdayArraySizeTest.push(+1);
+    }
+    console.log(newdayArraySizeTest)
+   
+  };
+
+
   useEffect(() => {
+
+    setFillCalendar({daysInMonth2: currentDaysInMonth})
     createDays(daysInMonth);
     checkCurrentMonth();
   }, [daysInMonth]);
@@ -52,21 +82,26 @@ const DatePicker = () => {
   };
 
   const nextMonthHandler = () => {
-    let newMonth = currentMonth;
+    //   let newMonth = currentMonth;
+    let newMonth = fillCalendar.currentMonth;
     const newMonthIndex = months.findIndex((x) => x.Month === newMonth) + 1;
 
     if (newMonthIndex > 11) {
       return;
     }
     const nextMonth = months[newMonthIndex];
-    console.log(nextMonth.days);
 
-    setDaysInMonth(nextMonth.days)
-    console.log(nextMonth.Month);
-    setCurrentMonth(nextMonth.Month);
+    //   setCurrentMonth(nextMonth.Month);
+    setFillCalendar({
+      daysInMonth2: nextMonth.days,
+      currentMonth: nextMonth.Month,
+    });
+    console.log(nextMonth.days);
+    /// setDaysInMonth(nextMonth.days);
+    /// setDaysInMonth(nextmonth);
   };
 
-  const previousMonthHandler = () => {
+  /* const previousMonthHandler = () => {
     let newMonth = currentMonth;
     const newMonthIndex = months.findIndex((x) => x.Month === newMonth) + -1;
     if (newMonthIndex < 0) {
@@ -76,16 +111,28 @@ const DatePicker = () => {
     setCurrentMonth(previousMonth.Month);
     //  setdayArraySize(previousMonth.days)
   };
+  */
+  const previousMonthHandler = () => {
+    console.log("test");
+  };
 
   const testhandler = () => {
-    setDaysInMonth(35);
+    setFillCalendar({
+      daysInMonth2: currentDaysInMonth
+    })
+    console.log(fillCalendar.daysInMonth2)
+    
+  };
+
+  const testhandler2 = () => {
+    createTest(fillCalendar.daysInMonth2)
   };
 
   return (
     <div>
       <h1>Pick your Date</h1>
       <div className="MonthOverview">
-        <div>{currentMonth}</div>
+        <div>{fillCalendar.currentMonth}</div>
         <div>
           Previous Month
           <button onClick={() => previousMonthHandler()}>Previous Month</button>
@@ -104,9 +151,11 @@ const DatePicker = () => {
       </div>
 
       <div>
-        You currently have {selectedDate} in {currentMonth} Selected
+        You currently have {selectedDate} in {fillCalendar.currentMonth}{" "}
+        Selected
       </div>
       <button onClick={() => testhandler()}>Next Step</button>
+      <button onClick={() => testhandler2()}>Test 2</button>
     </div>
   );
 };
