@@ -19,28 +19,34 @@ const DatePicker = () => {
   ];
   const [currentMonth, setCurrentMonth] = useState([]);
   const [selectedDate, setSelectedDate] = useState("No Date");
+  const [dayArray, setDayArray] = useState([]);
 
   const currentDate = new Date().toDateString();
   const populateCalendar = () => {
-    const DayOverview = document.querySelector(".DayOverView");
-    DayOverview.innerHTML = "";
     createDays();
   };
   const MonthDuration = 31;
   const createDays = () => {
+    let newDayArray = [];
+
     for (let i = 0; i < MonthDuration; i++) {
-      const DayOverview = document.querySelector(".DayOverView");
-      const day_element = document.createElement("button");
-      day_element.classList.add("day");
-      day_element.innerHTML = i + 1;
-      DayOverview.appendChild(day_element);
+      newDayArray.push(+1);
     }
+    setDayArray(newDayArray);
   };
 
   useEffect(() => {
     populateCalendar();
-    console.log(currentDate);
   }, []);
+
+  const testhandler = () => {
+    populateCalendar();
+    console.log(dayArray);
+  };
+
+  const selectDateHandler = (index) => {
+      setSelectedDate(index)
+  };
 
   return (
     <div>
@@ -50,10 +56,29 @@ const DatePicker = () => {
         <div>Previous Month</div>
         <div>Next Month</div>
       </div>
-      <div className="DayOverView"></div>
-      <div>You currently have {selectedDate} Selected</div>
+      <div className="DayOverView">
+        {dayArray.map((day, index) => (
+          <button key={index} onClick={() => selectDateHandler(index + 1)}>
+            {index + 1}
+          </button>
+        ))}
+      </div>
+      
+      <div>You currently have {selectedDate} March Selected</div>
+      <button onClick={testhandler}>Next Step</button>
     </div>
   );
 };
 
 export default DatePicker;
+
+/*
+
+  const DayOverview = document.querySelector(".DayOverView");
+      const day_element = document.createElement("button");
+      day_element.classList.add("day");
+      day_element.innerHTML = i + 1;
+      DayOverview.appendChild(day_element);
+    }
+
+*/
