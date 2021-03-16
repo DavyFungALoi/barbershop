@@ -21,9 +21,13 @@ const DatePicker = () => {
   const [selectedDate, setSelectedDate] = useState("No Date");
   const [dayArray, setDayArray] = useState([]);
 
-  const currentDate = new Date().toDateString();
   const populateCalendar = () => {
+    checkMonth();
     createDays();
+  };
+  const checkMonth = () => {
+    const d = new Date();
+    setCurrentMonth(months[d.getMonth()]);
   };
   const MonthDuration = 31;
   const createDays = () => {
@@ -45,16 +49,42 @@ const DatePicker = () => {
   };
 
   const selectDateHandler = (index) => {
-      setSelectedDate(index)
+    setSelectedDate(index);
+  };
+
+  const nextMonthHandler = () => {
+    let newMonth = currentMonth;
+    const newMonthIndex = months.indexOf(newMonth) + 1;
+    if (newMonthIndex > 11) {
+      return;
+    }
+    const nextMonth = months[newMonthIndex];
+    setCurrentMonth(nextMonth);
+  };
+
+  const previousMonthHandler = () => {
+    let newMonth = currentMonth;
+    const newMonthIndex = months.indexOf(newMonth) - 1;
+    if (newMonthIndex < 0) {
+      return;
+    }
+    const previousMonth = months[newMonthIndex];
+    setCurrentMonth(previousMonth);
   };
 
   return (
     <div>
       <h1>Pick your Date</h1>
       <div className="MonthOverview">
-        <div>{currentDate}</div>
-        <div>Previous Month</div>
-        <div>Next Month</div>
+        <div>{currentMonth}</div>
+        <div>
+          Previous Month
+          <button onClick={() => previousMonthHandler()}>Previous Month</button>
+        </div>
+        <div>
+          Next Month
+          <button onClick={() => nextMonthHandler()}>Next Month</button>
+        </div>
       </div>
       <div className="DayOverView">
         {dayArray.map((day, index) => (
@@ -63,22 +93,13 @@ const DatePicker = () => {
           </button>
         ))}
       </div>
-      
-      <div>You currently have {selectedDate} March Selected</div>
-      <button onClick={testhandler}>Next Step</button>
+
+      <div>
+        You currently have {selectedDate} in {currentMonth} Selected
+      </div>
+      <button onClick={checkMonth}>Next Step</button>
     </div>
   );
 };
 
 export default DatePicker;
-
-/*
-
-  const DayOverview = document.querySelector(".DayOverView");
-      const day_element = document.createElement("button");
-      day_element.classList.add("day");
-      day_element.innerHTML = i + 1;
-      DayOverview.appendChild(day_element);
-    }
-
-*/
