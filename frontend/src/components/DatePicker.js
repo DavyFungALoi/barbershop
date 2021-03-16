@@ -3,6 +3,13 @@ import { useEffect, useState } from "react";
 import { map } from "../sampleAppointment";
 
 const DatePicker = () => {
+  ///Get the current Day
+  const now = new Date();
+  const currentDaysInMonth = new Date(
+    now.getFullYear(),
+    now.getMonth() + 1,
+    0
+  ).getDate();
   const months = [
     { Month: "January", days: 31 },
     { Month: "February", days: 28 },
@@ -20,41 +27,25 @@ const DatePicker = () => {
   const [currentMonth, setCurrentMonth] = useState([]);
   const [selectedDate, setSelectedDate] = useState("No Date");
   const [dayArraySize, setdayArraySize] = useState([]);
-  const [daysInMonth, setDaysinMonth] = useState('')
+  const [daysInMonth, setDaysInMonth] = useState(currentDaysInMonth);
 
-  const populateCalendar = () => {
-    checkMonth();
-    createDays();
-  };
-  const checkMonth = () => {
+  const checkCurrentMonth = () => {
     const d = new Date();
     setCurrentMonth(months[d.getMonth()].Month);
   };
-
-  const checkDays = () => {
-    var now = new Date();
-    const kappa =(
-      new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate()
-    );
-    setDaysinMonth(kappa)
-    console.log(daysInMonth)
-  };
   const createDays = (daysInMonth) => {
     let newdayArraySize = [];
-
     for (let i = 0; i < daysInMonth; i++) {
       newdayArraySize.push(+1);
     }
-   
+
     setdayArraySize(newdayArraySize);
   };
 
   useEffect(() => {
-    checkDays()
-    checkMonth();
-    console.log(daysInMonth)
     createDays(daysInMonth);
-  }, []);
+    checkCurrentMonth();
+  }, [daysInMonth]);
 
   const selectDateHandler = (index) => {
     setSelectedDate(index);
@@ -68,8 +59,11 @@ const DatePicker = () => {
       return;
     }
     const nextMonth = months[newMonthIndex];
+    console.log(nextMonth.days);
+
+    setDaysInMonth(nextMonth.days)
+    console.log(nextMonth.Month);
     setCurrentMonth(nextMonth.Month);
-    // setdayArraySize(nextMonth.days)
   };
 
   const previousMonthHandler = () => {
@@ -83,9 +77,9 @@ const DatePicker = () => {
     //  setdayArraySize(previousMonth.days)
   };
 
-const testhandler = () => {
-    createDays(daysInMonth)
-}
+  const testhandler = () => {
+    setDaysInMonth(35);
+  };
 
   return (
     <div>
