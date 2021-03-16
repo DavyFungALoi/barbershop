@@ -1,10 +1,12 @@
 import './App.css';
+import DatePicker from './components/DatePicker';
 import AppointmentScreen from "./Screens/AppointmentScreen.js"
 
 function App() {
   return (
     <div className="App">
-      <AppointmentScreen></AppointmentScreen>
+      <DatePicker></DatePicker>
+    
      </div>
   );
 }
