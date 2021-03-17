@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { map } from "../sampleAppointment";
+
 
 const DatePicker = () => {
   ///Get the current Day/

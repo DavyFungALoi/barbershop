@@ -1,9 +1,13 @@
 import express from 'express'
 import dotenv from "dotenv"
 import appointments from './sampleAppointment.js'
+import connectDB from './config/db.js' 
+import colors from 'colors'
 const app = express()
 
 dotenv.config()
+
+connectDB()
 
 
 app.get ('/', (req, res) => {
