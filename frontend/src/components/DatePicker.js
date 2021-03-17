@@ -12,9 +12,6 @@ const DatePicker = () => {
     0
   ).getDate();
   */
-  
-
-  
 
   const now = new Date();
   const currentDaysInMonth = new Date(
@@ -65,14 +62,11 @@ const DatePicker = () => {
     for (let i = 0; i < daysInMonth; i++) {
       newdayArraySizeTest.push(+1);
     }
-    console.log(newdayArraySizeTest)
-   
+    console.log(newdayArraySizeTest);
   };
 
-
   useEffect(() => {
-
-    setFillCalendar({daysInMonth2: currentDaysInMonth})
+    setFillCalendar({ daysInMonth2: currentDaysInMonth });
     createDays(daysInMonth);
     checkCurrentMonth();
   }, [daysInMonth]);
@@ -118,14 +112,16 @@ const DatePicker = () => {
 
   const testhandler = () => {
     setFillCalendar({
-      daysInMonth2: currentDaysInMonth
-    })
-    console.log(fillCalendar.daysInMonth2)
-    
+      daysInMonth2: currentDaysInMonth,
+    });
+    console.log(fillCalendar.daysInMonth2);
   };
 
   const testhandler2 = () => {
-    createTest(fillCalendar.daysInMonth2)
+    setFillCalendar({
+      daysInMonth2: currentDaysInMonth,
+    });
+    createTest(fillCalendar.daysInMonth2);
   };
 
   return (
