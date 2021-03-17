@@ -46,4 +46,4 @@ const appointments = [
   },
 ];
 
-module.exports = appointments
+export default appointments

@@ -1,6 +1,6 @@
-const express = require('express')
-const appointments = require('../frontend/src/sampleAppointment')
-const dotenv = require('dotenv')
+import express from 'express'
+import dotenv from "dotenv"
+import appointments from './sampleAppointment.js'
 const app = express()
 
 dotenv.config()
