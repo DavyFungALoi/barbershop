@@ -57,9 +57,9 @@ const getBarbers = asyncHandler(async (req, res) => {
 
   const authUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
-  const userExists = await User.findOne({ email, password });
-
-  if (userExists) {
+  const userExists = await User.findOne({ email});
+    
+  if (userExists && (await user.matchPassword(password))) {
     res.status(201).json({
       _id: user._id,
       name: user.name,
@@ -69,7 +69,7 @@ const getBarbers = asyncHandler(async (req, res) => {
     });
   } else {
     res.status(400);
-    throw new Error("No email or user found");
+    throw new Error("No email or user found or invalid");
   }
 });
 
