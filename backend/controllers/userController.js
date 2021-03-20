@@ -33,5 +33,10 @@ const registerUser = asyncHandler(async (req, res) => {
     res.json(users)
   });
 
+  const getBarbers = asyncHandler(async (req, res) => {
+    const barbers = await User.find({"isBarber": true})
+    res.json(barbers)
+  });
+
   
- export {registerUser, getUsers} 
+ export {registerUser, getUsers,getBarbers} 

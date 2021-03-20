@@ -8,6 +8,11 @@ const appointmentSchema = mongoose.Schema(
       ref: "User",
     },
 
+    barber: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: "User",
+    },
     date: { type: String, required: true },
     timeSlot: { type: String, required: true },
     dateCreated: { type: Date, default: Date.now },
