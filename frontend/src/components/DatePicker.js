@@ -1,7 +1,10 @@
 import React from "react";
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addAppointmentDetails } from "../actions/appointmentActions.js";
 
 const DatePicker = () => {
+  const dispatch = useDispatch();
   const now = new Date();
   const daysInInitialMonthNow = new Date(
     now.getFullYear(),
@@ -67,6 +70,7 @@ const DatePicker = () => {
       currentMonth: nextMonth.Month,
     });
     createDays(nextMonth.days);
+    setSelectedDate("no day");
   };
 
   const previousMonthHandler = () => {
@@ -82,10 +86,17 @@ const DatePicker = () => {
       currentMonth: previousMonth.Month,
     });
     createDays(previousMonth.days);
+    setSelectedDate("no day");
   };
 
   const testhandler = () => {
-    console.log("test");
+    const selectedDayCheck = isNaN(selectedDate);
+    if (selectedDayCheck) {
+      console.log("please select a day");
+      return;
+    }
+    const combinedDateAndMonth = `${selectedDate} ${fillCalendar.currentMonth}`;
+    dispatch(addAppointmentDetails(combinedDateAndMonth));
   };
 
   return (

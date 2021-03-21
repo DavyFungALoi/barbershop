@@ -2,12 +2,20 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { userBarberList } from "../actions/userBarberActions.js";
+import DatePicker from "../components/DatePicker.js";
 
 const AppointmentScreen = () => {
   const dispatch = useDispatch();
 
   const barberList = useSelector((state) => state.userBarberList);
   const { loading: barberLoading, error: barberError, BarberInfo } = barberList;
+
+  const [slotsArray, setSlotsArray] = useState([]);
+  const [currentTimeSlot, setCurrentTimeSlot] = useState(
+    "Please Select a Timeslot"
+  );
+
+  const [BarberSelect, setBarberSelect] = useState("");
 
   function createSlots() {
     const slotConfig = {
@@ -85,12 +93,6 @@ const AppointmentScreen = () => {
     createSlots();
   }, []);
 
-  const [slotsArray, setSlotsArray] = useState([]);
-
-  const [currentTimeSlot, setCurrentTimeSlot] = useState(
-    "Please Select a Timeslot"
-  );
-
   const TimeSlotHandler = (timeslotStart, timeSlotEnd) => {
     setCurrentTimeSlot(`${timeslotStart} - ${timeSlotEnd}`);
   };
@@ -98,6 +100,7 @@ const AppointmentScreen = () => {
   return (
     <>
       <div>Make An Appointment</div>
+      <DatePicker></DatePicker>
       {slotsArray.map((timeSlot) => (
         <div key={timeSlot.timeSlotId}>
           <button
@@ -110,13 +113,21 @@ const AppointmentScreen = () => {
         </div>
       ))}
       <div>Selected timeslot is {currentTimeSlot}</div>
-    {barberLoading ? (
-      <div>loading</div>
-    ) : barberError ? (
-      <div>Error</div>
-    ) : (
-      <div>{BarberInfo[0].name}</div>
-    ) }
+      {barberLoading ? (
+        <div>loading</div>
+      ) : barberError ? (
+        <div>Error</div>
+      ) : (
+        <>
+          {BarberInfo &&
+            BarberInfo.map((barber) => (
+              <div key={barber._id}>
+                <button> {barber.name}</button>
+              </div>
+            ))}
+        </>
+      )}
+      <div>Selected Barber is {currentTimeSlot}</div>
     </>
   );
 };
@@ -125,8 +136,9 @@ export default AppointmentScreen;
 
 /*
   <div>
-        {barbers.map((barber) => (
+        {BarberInfo.map((barber) => (
           <div>
+          
             {barber.name}
           </div>
         ))}
@@ -140,4 +152,19 @@ export default AppointmentScreen;
         ))}
       </div>
       )
+<div>{BarberInfo[0].name}</div>
+
+
+{Barberinfo && BarberInfo.map((barber) => (
+            <div>{barber.name}</div>
+          ))}
+
+<tbody>
+            {orders.map((order) => (
+              <tr key={order._id}>
+               
+              </tr>
+            ))}
+          </tbody>
+
 */

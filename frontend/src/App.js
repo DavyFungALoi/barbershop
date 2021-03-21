@@ -1,5 +1,4 @@
 import "./App.css";
-import DatePicker from "./components/DatePicker";
 import AppointmentScreen from "./Screens/AppointmentScreen.js";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import LoginScreen from "./Screens/LoginScreen";
