@@ -7,11 +7,11 @@ import axios from "axios";
 
 //
 
-export const userRegister = () => async (dispatch) => {
+export const userRegister = (name, email, password) => async (dispatch) => {
   try {
     dispatch({ type: USER_REGISTER_REQUEST });
 
-    const { data } = await axios.post("/api/users");
+    const { data } = await axios.post("/api/users", { name, email, password });
     dispatch({ type: USER_REGISTER_SUCCESS, payload: data });
   } catch (error) {
     dispatch({

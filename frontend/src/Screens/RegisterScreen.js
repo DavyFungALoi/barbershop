@@ -16,7 +16,7 @@ const RegisterScreen = () => {
       userRegister(
         name,
         email,
-        password,
+        password
       )
     );
   };
