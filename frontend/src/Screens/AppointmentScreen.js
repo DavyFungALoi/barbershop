@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { userBarberList } from "../actions/userBarberActions.js";
 import DatePicker from "../components/DatePicker.js";
+import {addAppointmentTimeSlot} from "../actions/appointmentActions.js"
 
 const AppointmentScreen = () => {
   const dispatch = useDispatch();
@@ -113,6 +114,7 @@ const AppointmentScreen = () => {
         </div>
       ))}
       <div>Selected timeslot is {currentTimeSlot}</div>
+      <button>Next Step</button>
       {barberLoading ? (
         <div>loading</div>
       ) : barberError ? (
