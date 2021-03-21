@@ -1,13 +1,12 @@
-import React from 'react'
-import DatePicker from '../components/DatePicker'
+import React from "react";
+import DatePicker from "../components/DatePicker";
 
 const HomeScreen = () => {
-    return (
-        <div>
-            HomeScreen
-            <DatePicker></DatePicker>
-        </div>
-    )
-}
+  return (
+    <div>
+      <DatePicker></DatePicker>
+    </div>
+  );
+};
 
-export default HomeScreen
+export default HomeScreen;
