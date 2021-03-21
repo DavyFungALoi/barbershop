@@ -1,4 +1,4 @@
-import Barber from "../models/barberModel.js";
+/*import Barber from "../models/barberModel.js";
 import asyncHandler from "express-async-handler";
 
 
@@ -35,3 +35,4 @@ const registerBarber = asyncHandler(async (req, res) => {
 
   
  export {registerBarber, getBarbers} 
+ */

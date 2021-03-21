@@ -1,7 +1,14 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { userBarberList } from "../actions/userBarberActions.js";
 
 const AppointmentScreen = () => {
+  const dispatch = useDispatch();
+
+  const barberList = useSelector((state) => state.userBarberList);
+  const { loading: barberLoading, error: barberError, BarberInfo } = barberList;
+
   function createSlots() {
     const slotConfig = {
       configSlotMinutes: "30",
@@ -74,22 +81,23 @@ const AppointmentScreen = () => {
   }
 
   useEffect(() => {
+    dispatch(userBarberList());
     createSlots();
   }, []);
 
   const [slotsArray, setSlotsArray] = useState([]);
 
-  const [currentTimeSlot, setCurrentTimeSlot] = useState("Please Select a Timeslot");
+  const [currentTimeSlot, setCurrentTimeSlot] = useState(
+    "Please Select a Timeslot"
+  );
 
   const TimeSlotHandler = (timeslotStart, timeSlotEnd) => {
     setCurrentTimeSlot(`${timeslotStart} - ${timeSlotEnd}`);
-  
   };
 
   return (
     <>
       <div>Make An Appointment</div>
-
       {slotsArray.map((timeSlot) => (
         <div key={timeSlot.timeSlotId}>
           <button
@@ -102,8 +110,34 @@ const AppointmentScreen = () => {
         </div>
       ))}
       <div>Selected timeslot is {currentTimeSlot}</div>
+    {barberLoading ? (
+      <div>loading</div>
+    ) : barberError ? (
+      <div>Error</div>
+    ) : (
+      <div>{BarberInfo[0].name}</div>
+    ) }
     </>
   );
 };
 
 export default AppointmentScreen;
+
+/*
+  <div>
+        {barbers.map((barber) => (
+          <div>
+            {barber.name}
+          </div>
+        ))}
+      </div>
+
+
+        {barberLoading  (<div>Loading</div>) : (
+      <div>
+        {barbers.map((barber) => (
+          <div>{barber.name}</div>
+        ))}
+      </div>
+      )
+*/

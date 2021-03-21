@@ -3,9 +3,11 @@ import thunk from 'redux-thunk'
 import { composeWithDevTools} from 'redux-devtools-extension'
 
 import {userRegisterReducer } from '../src/reducers/userReducer'
+import { userBarberListReducer } from './reducers/userBarberReducer'
 
 const reducer = combineReducers({
     userRegister: userRegisterReducer, 
+    userBarberList: userBarberListReducer
 })
 
 const initialState={}

@@ -42,6 +42,8 @@ const getUsers = asyncHandler(async (req, res) => {
   res.json(users);
 });
 
+///Barbers
+
 //@desc        Get an overview of all users that are barbers
 //@route       GET /api/users/
 //@access      Public
