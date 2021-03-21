@@ -3,7 +3,10 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { userBarberList } from "../actions/userBarberActions.js";
 import DatePicker from "../components/DatePicker.js";
-import { addAppointmentTimeSlot } from "../actions/appointmentActions.js";
+import {
+  addAppointmentTimeSlot,
+  addAppointmentBarber,
+} from "../actions/appointmentActions.js";
 
 const AppointmentScreen = () => {
   const dispatch = useDispatch();
@@ -16,8 +19,7 @@ const AppointmentScreen = () => {
     "Please Select a Timeslot"
   );
 
-  const [BarberSelect, setBarberSelect] = useState("");
-
+  const [barberSelect, setBarberSelect] = useState("")
   function createSlots() {
     const slotConfig = {
       configSlotMinutes: "30",
@@ -94,10 +96,19 @@ const AppointmentScreen = () => {
     createSlots();
   }, []);
 
-  const TimeSlotHandler = (timeslotStart, timeSlotEnd) => {
+  const timeSlotHandler = (timeslotStart, timeSlotEnd) => {
     setCurrentTimeSlot(`${timeslotStart} - ${timeSlotEnd}`);
   };
-  const testhandler = () => {
+
+  const nextStepHandlerTimeSlot = () => {
+    dispatch(addAppointmentTimeSlot(currentTimeSlot));
+  };
+  const barberHandler = (id) => {
+    setBarberSelect(id)
+  
+  };
+
+  const nextStepHandlerBarber = () => {
     dispatch(addAppointmentTimeSlot(currentTimeSlot));
   };
 
@@ -109,7 +120,7 @@ const AppointmentScreen = () => {
         <div key={timeSlot.timeSlotId}>
           <button
             onClick={() =>
-              TimeSlotHandler(timeSlot.timeSlotStart, timeSlot.timeSlotEnd)
+              timeSlotHandler(timeSlot.timeSlotStart, timeSlot.timeSlotEnd)
             }
           >
             {timeSlot.timeSlotStart} - {timeSlot.timeSlotEnd}
@@ -117,7 +128,7 @@ const AppointmentScreen = () => {
         </div>
       ))}
       <div>Selected timeslot is {currentTimeSlot}</div>
-      <button onClick={() => testhandler()}>Next Step</button>
+      <button onClick={() => nextStepHandlerTimeSlot()}>Next Step</button>
       {barberLoading ? (
         <div>loading</div>
       ) : barberError ? (
@@ -127,49 +138,17 @@ const AppointmentScreen = () => {
           {BarberInfo &&
             BarberInfo.map((barber) => (
               <div key={barber._id}>
-                <button> {barber.name}</button>
+                <button onClick={() => barberHandler(barber._id)}>
+                  {barber.name}
+                </button>
               </div>
             ))}
         </>
       )}
-      <div>Selected Barber is {currentTimeSlot}</div>
+      <div>Selected Barber is {barberSelect}</div>
+      <button onClick={() => nextStepHandlerBarber()}>Final Step</button>
     </>
   );
 };
 
 export default AppointmentScreen;
-
-/*
-  <div>
-        {BarberInfo.map((barber) => (
-          <div>
-          
-            {barber.name}
-          </div>
-        ))}
-      </div>
-
-
-        {barberLoading  (<div>Loading</div>) : (
-      <div>
-        {barbers.map((barber) => (
-          <div>{barber.name}</div>
-        ))}
-      </div>
-      )
-<div>{BarberInfo[0].name}</div>
-
-
-{Barberinfo && BarberInfo.map((barber) => (
-            <div>{barber.name}</div>
-          ))}
-
-<tbody>
-            {orders.map((order) => (
-              <tr key={order._id}>
-               
-              </tr>
-            ))}
-          </tbody>
-
-*/
