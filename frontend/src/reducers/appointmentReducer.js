@@ -7,7 +7,7 @@ import {
 } from "../constants/appointmentConstants";
 
 export const addAppointmentDetailsReducer = (
-  state = { appointmentDate: "", timeSlot: "" },
+  state = { },
   action
 ) => {
   switch (action.type) {
