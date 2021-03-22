@@ -8,8 +8,6 @@ import {
 
 export const addAppointmentDetails = (data) => async (dispatch) => {
   try {
-    dispatch({ type: ADD_APPOINTMENT_DETAIL_REQUEST });
-
     dispatch({ type: ADD_APPOINTMENT_DETAIL_DATE, payload: data });
   } catch (error) {
     dispatch({
@@ -24,8 +22,7 @@ export const addAppointmentDetails = (data) => async (dispatch) => {
 
 export const addAppointmentTimeSlot = (data) => async (dispatch) => {
   try {
-    dispatch({ type: ADD_APPOINTMENT_DETAIL_REQUEST });
-
+    
     dispatch({ type: ADD_APPOINTMENT_DETAIL_TIMESLOT, payload: data });
   } catch (error) {
     dispatch({
@@ -40,8 +37,6 @@ export const addAppointmentTimeSlot = (data) => async (dispatch) => {
 
 export const addAppointmentBarber = (data) => async (dispatch) => {
   try {
-    dispatch({ type: ADD_APPOINTMENT_DETAIL_REQUEST });
-
     dispatch({ type: ADD_APPOINTMENT_DETAIL_BARBER, payload: data });
   } catch (error) {
     dispatch({

@@ -18,7 +18,7 @@ export const addAppointmentDetailsReducer = (
     case ADD_APPOINTMENT_DETAIL_TIMESLOT:
       return { ...state, timeSlot: action.payload };
     case ADD_APPOINTMENT_DETAIL_BARBER:
-      return { ...state, timeSlot: action.payload };
+      return { ...state, barber: action.payload };
     case ADD_APPOINTMENT_DETAIL_FAIL:
       return { loading: false, error: action.payload };
     default:

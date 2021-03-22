@@ -7,6 +7,7 @@ import {
   addAppointmentTimeSlot,
   addAppointmentBarber,
 } from "../actions/appointmentActions.js";
+import ConfirmAppointment from "../components/ConfirmAppointment.js";
 
 const AppointmentScreen = () => {
   const dispatch = useDispatch();
@@ -19,7 +20,7 @@ const AppointmentScreen = () => {
     "Please Select a Timeslot"
   );
 
-  const [barberSelect, setBarberSelect] = useState("")
+  const [barberSelect, setBarberSelect] = useState("");
   function createSlots() {
     const slotConfig = {
       configSlotMinutes: "30",
@@ -103,13 +104,12 @@ const AppointmentScreen = () => {
   const nextStepHandlerTimeSlot = () => {
     dispatch(addAppointmentTimeSlot(currentTimeSlot));
   };
-  const barberHandler = (id) => {
-    setBarberSelect(id)
-  
+  const barberHandler = (name) => {
+    setBarberSelect(name);
   };
 
   const nextStepHandlerBarber = () => {
-    dispatch(addAppointmentTimeSlot(currentTimeSlot));
+    dispatch(addAppointmentBarber(barberSelect));
   };
 
   return (
@@ -138,7 +138,7 @@ const AppointmentScreen = () => {
           {BarberInfo &&
             BarberInfo.map((barber) => (
               <div key={barber._id}>
-                <button onClick={() => barberHandler(barber._id)}>
+                <button onClick={() => barberHandler(barber.name)}>
                   {barber.name}
                 </button>
               </div>
@@ -147,6 +147,7 @@ const AppointmentScreen = () => {
       )}
       <div>Selected Barber is {barberSelect}</div>
       <button onClick={() => nextStepHandlerBarber()}>Final Step</button>
+      <ConfirmAppointment></ConfirmAppointment>
     </>
   );
 };
