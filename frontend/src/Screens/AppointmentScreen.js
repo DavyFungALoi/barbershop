@@ -11,16 +11,22 @@ const AppointmentScreen = () => {
     (state) => state.addAppointmentDetails
   );
   const { appointmentDate, timeSlot, barber } = appointmentDetails;
+
   return (
     <>
       <div>Make An Appointment</div>
 
       <DatePicker></DatePicker>
-      <TimePicker></TimePicker>
-      <BarberPicker></BarberPicker>
-      <ConfirmAppointment></ConfirmAppointment>
+      {appointmentDate ? <TimePicker></TimePicker> : <div>Select A date</div>}
+      {(appointmentDate, timeSlot ? <BarberPicker></BarberPicker> : <></>)}
+      {
+        (appointmentDate,
+        timeSlot,
+        barber ? <ConfirmAppointment></ConfirmAppointment> : <></>)
+      }
     </>
   );
 };
 
 export default AppointmentScreen;
+
