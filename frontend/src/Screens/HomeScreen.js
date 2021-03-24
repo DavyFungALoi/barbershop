@@ -4,7 +4,14 @@ import DatePicker from "../components/DatePicker";
 const HomeScreen = () => {
   return (
     <div>
-      <DatePicker></DatePicker>
+      Welcome to Barbershop
+      <a href="#">
+        <button>Make Appointment Online</button>
+      </a>
+      <div>Or</div>
+      <a href="#">
+        <button>Call us</button>
+      </a>
     </div>
   );
 };

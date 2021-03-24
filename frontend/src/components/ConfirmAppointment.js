@@ -9,7 +9,7 @@ const ConfirmAppointment = () => {
   const { appointmentDate, timeSlot, barber } = appointmentDetails;
   return (
     <div>
-      {`Your current appointment is ${appointmentDate}, ${timeSlot}, ${barber}`} 
+      {`Your current appointment is ${appointmentDate}, ${timeSlot} with ${barber}`} 
       <button>Confirm Appointment</button>
     </div>
   );
