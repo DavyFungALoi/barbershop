@@ -1,12 +1,11 @@
 import React from "react";
+import GoogleMaps from "../components/GoogleMaps";
+
 
 const ContactScreen = () => {
-
-
   return (
     <div>
       <div>
-        {" "}
         ContactDetails
         <div>
           Phone Number
@@ -19,7 +18,7 @@ const ContactScreen = () => {
         </div>
         <div>Location</div>
         <div>We are located here</div>
-        <div id="map"></div>
+        <GoogleMaps></GoogleMaps>
       </div>
     </div>
   );
