@@ -1,16 +1,11 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { userBarberList } from "../actions/userBarberActions.js";
-import DatePicker from "../components/DatePicker.js";
-import {
-  addAppointmentTimeSlot,
-  addAppointmentBarber,
-} from "../actions/appointmentActions.js";
-import ConfirmAppointment from "../components/ConfirmAppointment.js";
+
+import { addAppointmentTimeSlot } from "../actions/appointmentActions.js";
 
 const TimePicker = () => {
-  const dispatch = useDispatch()  
+  const dispatch = useDispatch();
   const [slotsArray, setSlotsArray] = useState([]);
   const [currentTimeSlot, setCurrentTimeSlot] = useState(
     "Please Select a Timeslot"
