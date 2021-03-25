@@ -2,6 +2,7 @@ import {
   USER_LOGIN_FAIL,
   USER_LOGIN_REQUEST,
   USER_LOGIN_SUCCESS,
+  USER_LOGOUT,
   USER_REGISTER_FAIL,
   USER_REGISTER_REQUEST,
   USER_REGISTER_SUCCESS,
@@ -45,3 +46,9 @@ export const userLogin = (email, password) => async (dispatch) => {
     });
   }
 };
+
+export const userLogout = () => async(dispatch) => {
+  localStorage.removeItem("userInfo");
+ // userLogin = {}
+  dispatch({type: USER_LOGOUT})
+}
