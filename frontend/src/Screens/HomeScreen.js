@@ -5,11 +5,11 @@ const HomeScreen = () => {
   return (
     <div>
       Welcome to Barbershop
-      <a href="#">
+      <a href="/appointment">
         <button>Make Appointment Online</button>
       </a>
       <div>Or</div>
-      <a href="#">
+      <a href="/contact">
         <button>Call us</button>
       </a>
     </div>

@@ -4,17 +4,19 @@ const ContactScreen = () => {
   return (
     <div>
       <div>
-        ContactDetails
+        <h1>Contact Details</h1>
+
         <div>
-          Phone Number
-          <div>Number</div>
-          <div>Click to Call</div>
+          <h2>Phone Number</h2>
+          <h3>Number</h3>
+          <button>Call now</button>
         </div>
         <div>
-          Email
+          <h2>Email</h2>
           <div>Email us at</div>
+          <button>Email us now</button>
         </div>
-        <div>Location</div>
+        <h2>Location</h2>
         <div>We are located here</div>
       </div>
     </div>

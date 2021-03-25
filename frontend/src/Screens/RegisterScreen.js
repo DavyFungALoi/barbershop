@@ -20,17 +20,10 @@ const RegisterScreen = () => {
       )
     );
   };
-  
-
-  /*const submitHandler = (e) => {
-    e.preventDefault()
-    console.log("test");
-  };
-  */
 
   return (
-    <div>
-      <div>Please Register</div>
+    <div className="Register__Container">
+      <h2>Please Register</h2>
       <form onSubmit={submitHandler}>
         <label htmlFor="name">Name</label>
         <input
@@ -57,6 +50,10 @@ const RegisterScreen = () => {
           Register
         </button>
       </form>
+      <h3>Already have an Account?</h3>
+      <a href="/login">
+        <button>Login Now</button>
+      </a>
     </div>
   );
 };
