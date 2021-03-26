@@ -42,6 +42,31 @@ const getUsers = asyncHandler(async (req, res) => {
   res.json(users);
 });
 
+//@desc        Get an overview of a user details
+//@route       GET /api/users/profile
+//@access      Private
+
+const getUserDetails = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.user_.id);
+  res.json(user);
+});
+
+//@desc        Get an overview of a user details by id
+//@route       GET /api/users/:id
+//@access      Private/admin
+
+const getUserById = asyncHandler(async (req, res) => {
+  const user= await User.findById(req.params.id).select('-password')
+  if(user) {
+    res.json(user)
+  }
+  else {
+    res.status(404)
+    throw new Error('User not found')
+  }
+
+});
+
 ///Barbers
 
 //@desc        Get an overview of all users that are barbers
@@ -60,7 +85,7 @@ const getBarbers = asyncHandler(async (req, res) => {
 const authUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email });
-  console.log(user)
+  console.log(user);
 
   if (user && (await user.matchPassword(password))) {
     res.status(201).json({
@@ -76,4 +101,4 @@ const authUser = asyncHandler(async (req, res) => {
   }
 });
 
-export { registerUser, getUsers, getBarbers, authUser };
+export { registerUser, getUsers, getUserById, getUserDetails, getBarbers, authUser };
