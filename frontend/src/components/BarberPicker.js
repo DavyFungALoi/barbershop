@@ -9,17 +9,17 @@ const BarberPicker = () => {
 
   const barberList = useSelector((state) => state.userBarberList);
   const { loading: barberLoading, error: barberError, BarberInfo } = barberList;
-  const [barberSelect, setBarberSelect] = useState("");
+  const [barberSelect, setBarberSelect] = useState({barberName: "", barberId:""});
 
   useEffect(() => {
     dispatch(userBarberList());
   }, []);
-  const barberHandler = (name) => {
-    setBarberSelect(name);
+  const barberHandler = (name, id) => {
+    setBarberSelect({barberName: name, barberId:id});
   };
 
   const nextStepHandlerBarber = () => {
-    dispatch(addAppointmentBarber(barberSelect));
+    dispatch(addAppointmentBarber(barberSelect.barberId));
   };
   return (
     <div>
@@ -32,14 +32,14 @@ const BarberPicker = () => {
           {BarberInfo &&
             BarberInfo.map((barber) => (
               <div key={barber._id}>
-                <button onClick={() => barberHandler(barber.name)}>
+                <button onClick={() => barberHandler(barber.name, barber._id)}>
                   {barber.name}
                 </button>
               </div>
             ))}
         </>
       )}
-      <div>Selected Barber is {barberSelect}</div>
+      <div>Selected Barber is {barberSelect.barberName}</div>
       <button onClick={() => nextStepHandlerBarber()}>Final Step</button>
     </div>
   );

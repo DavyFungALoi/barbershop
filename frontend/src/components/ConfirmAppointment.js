@@ -11,10 +11,13 @@ const ConfirmAppointment = () => {
   const { userInfo } = userLogin;
 
   const { appointmentDate, timeSlot, barber } = appointmentDetails;
+  const confirmHandler = () => {
+    console.log("test");
+  };
   return (
     <div>
       {`Your current appointment is ${appointmentDate}, ${timeSlot} with ${barber}`}
-      <button>Confirm Appointment</button>
+      <button onClick={() => {confirmHandler()}}>Confirm Appointment</button>
     </div>
   );
 };
