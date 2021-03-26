@@ -19,7 +19,7 @@ const BarberPicker = () => {
   };
 
   const nextStepHandlerBarber = () => {
-    dispatch(addAppointmentBarber(barberSelect.barberId));
+    dispatch(addAppointmentBarber(barberSelect));
   };
   return (
     <div>

@@ -8,13 +8,14 @@ import {
 } from "../src/reducers/userReducer";
 
 import { userBarberListReducer } from "../src/reducers/userBarberReducer";
-import { addAppointmentDetailsReducer } from "../src/reducers/appointmentReducer.js";
+import { addAppointmentDetailsReducer, createAppointmentReducer } from "../src/reducers/appointmentReducer.js";
 
 const reducer = combineReducers({
   userRegister: userRegisterReducer,
   userBarberList: userBarberListReducer,
   userLogin: userLoginReducer,
   addAppointmentDetails: addAppointmentDetailsReducer,
+  createAppointment: createAppointmentReducer,
 });
 const userInfoFromStorage = localStorage.getItem("userInfo")
   ? JSON.parse(localStorage.getItem("userInfo"))

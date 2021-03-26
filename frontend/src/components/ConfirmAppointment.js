@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { createAppointment } from "../actions/appointmentActions";
 
 const ConfirmAppointment = () => {
   const dispatch = useDispatch();
@@ -11,13 +12,23 @@ const ConfirmAppointment = () => {
   const { userInfo } = userLogin;
 
   const { appointmentDate, timeSlot, barber } = appointmentDetails;
+  const { barberName, barberId } = barber;
   const confirmHandler = () => {
-    console.log("test");
+    dispatch(
+      createAppointment(userInfo._id, barberId, appointmentDate, timeSlot)
+    );
   };
   return (
     <div>
-      {`Your current appointment is ${appointmentDate}, ${timeSlot} with ${barber}`}
-      <button onClick={() => {confirmHandler()}}>Confirm Appointment</button>
+      {`Your current appointment is ${appointmentDate}, ${timeSlot} with ${barberName}`}
+      <button
+        onClick={() => {
+          confirmHandler();
+        }}
+      >
+        Confirm Appointment
+      </button>
+      <div>{`${userInfo._id}`}</div>
     </div>
   );
 };
