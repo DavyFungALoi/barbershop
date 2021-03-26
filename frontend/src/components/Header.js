@@ -5,7 +5,6 @@ import { userLogout } from "../actions/userActions";
 const Header = () => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
-
   const dispatch = useDispatch();
 
   const logoutHandler = () => {
@@ -20,7 +19,7 @@ const Header = () => {
       <div>Location</div>
       <div>Make Appointment</div>
       {userInfo ? (
-        <div>{userInfo.name}</div>
+        <a href="users/profile">{userInfo.name}</a>
       ) : (
         <a href="/login">
           <button>Login Now</button>

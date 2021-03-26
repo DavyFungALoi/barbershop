@@ -77,7 +77,7 @@ const DatePicker = () => {
     let newMonth = fillCalendar.currentMonth;
     const newMonthIndex = months.findIndex((x) => x.Month === newMonth) - 1;
 
-    if (newMonthIndex > 11) {
+    if (newMonthIndex < 0) {
       return;
     }
     const previousMonth = months[newMonthIndex];
