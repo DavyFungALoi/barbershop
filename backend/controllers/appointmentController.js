@@ -44,4 +44,30 @@ const getAppointments = asyncHandler(async (req, res) => {
   res.json(appointments);
 });
 
-export { createAppointment, getAppointments };
+/*const getUserAppointments = asyncHandler(async (req, res) => {
+  const appointments = await Appointment.find({}).populate("user", "name");
+
+  res.json(appointments);
+  
+});*/
+
+/*const getUserAppointments = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.user_.id);
+  res.json(user);
+
+  const getMyOrders = asyncHandler(async (req, res) => {
+  const orders = await Order.find({user: req.user._id})
+  res.json(orders)
+
+  
+});
+});
+req.params.id)
+*/
+
+const getUserAppointments = asyncHandler(async (req, res) => {
+  const appointments = await Appointment.find({ user: req.params.id });
+  res.json(appointments);
+});
+
+export { createAppointment, getAppointments, getUserAppointments };
