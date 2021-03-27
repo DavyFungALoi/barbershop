@@ -1,10 +1,12 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from 'react-router-dom';
 import { createAppointment } from "../actions/appointmentActions";
 
 const ConfirmAppointment = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const appointmentDetails = useSelector(
     (state) => state.addAppointmentDetails
   );
@@ -15,6 +17,12 @@ const ConfirmAppointment = () => {
 
   const { appointmentDate, timeSlot, barber } = appointmentDetails;
   const { barberName, barberId } = barber;
+
+    useEffect(()=> {
+    if(success) {
+      history.push("/success")
+    }
+  },[history, success])
 
   const confirmHandler = () => {
     dispatch(
