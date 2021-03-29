@@ -31,6 +31,7 @@ const createAppointment = asyncHandler(async (req, res) => {
       date: appointment.date,
       timeSlot: appointment.timeSlot,
       barber: appointment.barber,
+      id: appointment._id,
     });
   } else {
     res.status(400);
@@ -44,30 +45,24 @@ const getAppointments = asyncHandler(async (req, res) => {
   res.json(appointments);
 });
 
-/*const getUserAppointments = asyncHandler(async (req, res) => {
-  const appointments = await Appointment.find({}).populate("user", "name");
-
-  res.json(appointments);
-  
-});*/
-
-/*const getUserAppointments = asyncHandler(async (req, res) => {
-  const user = await User.findById(req.user_.id);
-  res.json(user);
-
-  const getMyOrders = asyncHandler(async (req, res) => {
-  const orders = await Order.find({user: req.user._id})
-  res.json(orders)
-
-  
+const getAppointmentbyId = asyncHandler(async (req, res) => {
+  const appointment = await Appointment.findById(req.params.id);
+  if (appointment) {
+    res.json(appointment);
+  } else {
+    res.status(404);
+    throw new Error("appointment not found");
+  }
 });
-});
-req.params.id)
-*/
 
 const getUserAppointments = asyncHandler(async (req, res) => {
   const appointments = await Appointment.find({ user: req.params.id });
   res.json(appointments);
 });
 
-export { createAppointment, getAppointments, getUserAppointments };
+export {
+  createAppointment,
+  getAppointments,
+  getUserAppointments,
+  getAppointmentbyId,
+};

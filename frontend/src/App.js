@@ -8,6 +8,7 @@ import RegisterScreen from "./Screens/RegisterScreen";
 import TestScreen from "./Screens/TestScreen";
 import ContactScreen from "./Screens/ContactScreen";
 import UserDetailScreen from "./Screens/UserDetailScreen";
+import AppointmentSuccesScreen from "./Screens/AppointmentSuccesScreen"
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/login" component={LoginScreen} exact />
         <Route path="/register" component={RegisterScreen} exact />
         <Route path="/appointment" component={AppointmentScreen} exact />
+        <Route path="/appointment/:id" component={AppointmentSuccesScreen} exact />
         <Route path="/test" component={TestScreen} exact />
         <Route path="/contact" component={ContactScreen} exact />
         <Route path="/users/profile" component={UserDetailScreen} exact />

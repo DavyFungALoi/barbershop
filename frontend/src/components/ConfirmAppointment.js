@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
 import { createAppointment } from "../actions/appointmentActions";
 
 const ConfirmAppointment = () => {
@@ -10,19 +10,22 @@ const ConfirmAppointment = () => {
   const appointmentDetails = useSelector(
     (state) => state.addAppointmentDetails
   );
-  const createAppointmentSelector = useSelector((state) => state.createAppointment);
-  const { success, error } = createAppointmentSelector;
+  const createAppointmentSelector = useSelector(
+    (state) => state.createAppointment
+  );
+  const { success, error, data } = createAppointmentSelector;
+
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
   const { appointmentDate, timeSlot, barber } = appointmentDetails;
   const { barberName, barberId } = barber;
 
-    useEffect(()=> {
-    if(success) {
-      history.push("/success")
+  useEffect(() => {
+    if (success) {
+      history.push(`/appointment/${createAppointmentSelector.data.id}`);
     }
-  },[history, success])
+  }, [history, success]);
 
   const confirmHandler = () => {
     dispatch(
