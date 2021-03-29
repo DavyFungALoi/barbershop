@@ -46,7 +46,7 @@ const getAppointments = asyncHandler(async (req, res) => {
 });
 
 const getAppointmentbyId = asyncHandler(async (req, res) => {
-  const appointment = await Appointment.findById(req.params.id);
+  const appointment = await Appointment.findById(req.params.id).populate("barber", "name");
   if (appointment) {
     res.json(appointment);
   } else {
