@@ -12,6 +12,8 @@ const AppointmentScreen = () => {
   );
   const { appointmentDate, timeSlot, barber } = appointmentDetails;
 
+  
+
   return (
     <>
       <div>Make An Appointment</div>
