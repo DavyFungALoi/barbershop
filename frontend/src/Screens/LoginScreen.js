@@ -47,7 +47,6 @@ const LoginScreen = () => {
       <a href="/register">
         <button>Register Now</button>
       </a>
-      {success ? <div>success</div> : <div>Select A kappa</div>}
     </div>
   );
 };
