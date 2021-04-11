@@ -1,9 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { userRegister } from "../actions/userActions";
+import { useHistory } from "react-router-dom";
 
 const RegisterScreen = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
+
+  const userRegistered = useSelector((state) => state.userRegister);
+  const { success } = userRegistered;
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -11,15 +16,14 @@ const RegisterScreen = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log('test')
-    dispatch(
-      userRegister(
-        name,
-        email,
-        password
-      )
-    );
+    dispatch(userRegister(name, email, password));
   };
+
+  useEffect(() => {
+    if (success) {
+      history.push(`/login/success/`);
+    }
+  }, [history, success]);
 
   return (
     <div className="Register__Container">
@@ -46,9 +50,7 @@ const RegisterScreen = () => {
           id="password"
           value={password}
         ></input>
-        <button type="submit">
-          Register
-        </button>
+        <button type="submit">Register</button>
       </form>
       <h3>Already have an Account?</h3>
       <a href="/login">

@@ -9,7 +9,7 @@ const LoginScreenSuccess = () => {
 
   return (
     <div>
-      <div>Welcome back {name}</div>
+      <div>Welcome {name}</div>
       <button>Make an Appointment</button>
       <button>Visit your profile</button>
       <button>Go Back to home</button>
