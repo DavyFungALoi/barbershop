@@ -35,7 +35,6 @@ const Header = () => {
           <button>Login Now</button>
         </a>
       )}
-      <button onClick={() => logoutHandler()}>Log Out</button>
     </div>
   );
 };

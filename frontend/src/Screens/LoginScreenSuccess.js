@@ -10,9 +10,15 @@ const LoginScreenSuccess = () => {
   return (
     <div>
       <div>Welcome {name}</div>
-      <button>Make an Appointment</button>
-      <button>Visit your profile</button>
-      <button>Go Back to home</button>
+      <a href="/appointment">
+        <button>Make an Appointment</button>
+      </a>
+      <a href="/users/profile">
+        <button>Visit your profile</button>
+      </a>
+      <a href="/">
+        <button>Go Back to home</button>
+      </a>
     </div>
   );
 };
