@@ -47,7 +47,7 @@ const getUsers = asyncHandler(async (req, res) => {
 //@access      Private
 
 const getUserDetails = asyncHandler(async (req, res) => {
-  const user = await User.findById(req.user_.id);
+  const user = await User.findById(req.user.id);
   res.json(user);
 });
 
@@ -56,15 +56,13 @@ const getUserDetails = asyncHandler(async (req, res) => {
 //@access      Private/admin
 
 const getUserById = asyncHandler(async (req, res) => {
-  const user= await User.findById(req.params.id).select('-password')
-  if(user) {
-    res.json(user)
+  const user = await User.findById(req.params.id).select("-password");
+  if (user) {
+    res.json(user);
+  } else {
+    res.status(404);
+    throw new Error("User not found");
   }
-  else {
-    res.status(404)
-    throw new Error('User not found')
-  }
-
 });
 
 ///Barbers
@@ -101,4 +99,17 @@ const authUser = asyncHandler(async (req, res) => {
   }
 });
 
-export { registerUser, getUsers, getUserById, getUserDetails, getBarbers, authUser };
+
+const getUsersTest = asyncHandler(async (req, res) => {
+res.send("test")
+});
+
+export {
+  registerUser,
+  getUsers,
+  getUserById,
+  getUserDetails,
+  getBarbers,
+  authUser,
+  getUsersTest,
+};
