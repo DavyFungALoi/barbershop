@@ -57,19 +57,23 @@ const getAppointmentbyId = asyncHandler(async (req, res) => {
     throw new Error("appointment not found");
   }
 });
+//@desc        Get an overview of a user details
+//@route       GET /api/appointments/myappointments
+//@access      Private
 
 const getMyAppointments = asyncHandler(async (req, res) => {
-  res.send("success");
-});
-
-/*
   const appointments = await Appointment.find({ user: req.user.id });
   res.json(appointments);
-*/
+});
+
+const test = asyncHandler(async (req, res) => {
+  res.send("test");
+});
 
 export {
   createAppointment,
   getAppointments,
   getMyAppointments,
   getAppointmentbyId,
+  test,
 };

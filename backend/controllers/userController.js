@@ -99,11 +99,6 @@ const authUser = asyncHandler(async (req, res) => {
   }
 });
 
-
-const getUsersTest = asyncHandler(async (req, res) => {
-res.send("test")
-});
-
 export {
   registerUser,
   getUsers,
@@ -111,5 +106,4 @@ export {
   getUserDetails,
   getBarbers,
   authUser,
-  getUsersTest,
 };
